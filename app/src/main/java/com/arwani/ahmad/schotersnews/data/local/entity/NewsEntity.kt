@@ -1,10 +1,13 @@
 package com.arwani.ahmad.schotersnews.data.local.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.arwani.ahmad.schotersnews.data.local.DatabaseConstant
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = DatabaseConstant.news)
 class NewsEntity(
     @field:ColumnInfo(name = DatabaseConstant.title)
@@ -22,4 +25,4 @@ class NewsEntity(
 
     @field:ColumnInfo(name = DatabaseConstant.bookmarked)
     var isBookmarked: Boolean
-)
+): Parcelable

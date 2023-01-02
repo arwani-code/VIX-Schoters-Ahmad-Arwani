@@ -1,5 +1,6 @@
 package com.arwani.ahmad.schotersnews.ui.home
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,14 +14,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import com.arwani.ahmad.schotersnews.R
+import com.arwani.ahmad.schotersnews.ui.category.CategoryActivity
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+    val mContext = LocalContext.current
+
     Column(
         modifier = modifier.fillMaxSize(),
     ) {
@@ -46,10 +49,19 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item(span = { GridItemSpan(2) }) {
-                Text(text = "News Categories", style = MaterialTheme.typography.h6, color = Color.White, modifier = modifier.padding(bottom = 8.dp))
+                Text(
+                    text = "News Categories",
+                    style = MaterialTheme.typography.h6,
+                    color = Color.White,
+                    modifier = modifier.padding(bottom = 8.dp)
+                )
             }
             items(dummyCategory, key = { it.textCategory }) { category ->
-                CategoryItem(category = category)
+                CategoryItem(category = category, onClick = {
+                    val intent = Intent(mContext, CategoryActivity::class.java)
+                    intent.putExtra(CategoryActivity.NEWS_CATEGORY, it)
+                    mContext.startActivity(intent)
+                })
             }
         }
     }

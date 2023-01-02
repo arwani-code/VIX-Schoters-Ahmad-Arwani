@@ -39,4 +39,13 @@ class NewsRepository @Inject constructor(
         val localData: LiveData<Result<List<NewsEntity>>> = newsDao.getNews().map { Result.Success(it) }
         emitSource(localData)
     }
+
+    fun getBookmarkedNews(): LiveData<List<NewsEntity>> {
+        return newsDao.getBookmarkedNews()
+    }
+
+    suspend fun setNewsBookmark(news: NewsEntity, bookmarkState: Boolean) {
+        news.isBookmarked = bookmarkState
+        newsDao.updateNews(news)
+    }
 }

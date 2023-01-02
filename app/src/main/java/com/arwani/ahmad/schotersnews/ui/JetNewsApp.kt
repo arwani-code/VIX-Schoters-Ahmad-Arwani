@@ -21,7 +21,7 @@ fun JetNewsApp(
     modifier: Modifier = Modifier,
     viewModel: NewsViewModel = hiltViewModel(),
     navController: NavHostController = rememberNavController(),
-){
+) {
     Scaffold(
         bottomBar = {
             BottomBar(navController = navController)

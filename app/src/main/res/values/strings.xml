@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Schoters News</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Schoters</string>
 
-    <string name="sport_category">Sports</string>
-    <string name="business_category">Business</string>
-    <string name="health_category">Health</string>
-    <string name="entertainment_category">Entertainment</string>
-    <string name="technology_category">Technology</string>
-    <string name="music_category">Music</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="title">Title</string>
+    <string name="published_date">Published Date</string>
+    <string name="save_bookmark">Save Bookmark?</string>
+    <string name="title_activity_detail_news">DetailNewsActivity</string>
+
+    <!--    <string name="sport_category">Sports</string>-->
+    <!--    <string name="business_category">Business</string>-->
+    <!--    <string name="health_category">Health</string>-->
+    <!--    <string name="entertainment_category">Entertainment</string>-->
+    <!--    <string name="technology_category">Technology</string>-->
+    <!--    <string name="music_category">Music</string>-->
 </resources>

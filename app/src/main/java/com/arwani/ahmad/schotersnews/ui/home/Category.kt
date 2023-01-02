@@ -1,46 +1,45 @@
 package com.arwani.ahmad.schotersnews.ui.home
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import com.arwani.ahmad.schotersnews.R
 import com.arwani.ahmad.schotersnews.ui.theme.*
 
 data class Category(
     @DrawableRes val imageCategory: Int,
-    @StringRes val textCategory: Int,
+    val textCategory: String,
     val color: Color
 )
 
 val dummyCategory = listOf(
     Category(
         imageCategory = R.drawable.business,
-        textCategory = R.string.business_category,
+        textCategory = "Business",
         color = Blue50
     ),
     Category(
         imageCategory = R.drawable.entertainment,
-        textCategory = R.string.entertainment_category,
+        textCategory = "Entertainment",
         color = Red200
     ),
     Category(
         imageCategory = R.drawable.health,
-        textCategory = R.string.health_category,
+        textCategory = "Health",
         color = Yellow100
     ),
     Category(
         imageCategory = R.drawable.technology,
-        textCategory = R.string.technology_category,
+        textCategory = "Technology",
         color = Green200
     ),
     Category(
         imageCategory = R.drawable.sports,
-        textCategory = R.string.sport_category,
+        textCategory = "Sports",
         color = Blue50
     ),
     Category(
         imageCategory = R.drawable.music,
-        textCategory = R.string.music_category,
+        textCategory = "Music",
         color = Black100
     )
 )

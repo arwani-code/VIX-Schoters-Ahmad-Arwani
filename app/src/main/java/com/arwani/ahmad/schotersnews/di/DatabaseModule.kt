@@ -27,9 +27,9 @@ class DatabaseModule {
             context,
             NewsDatabase::class.java,
             "News.db"
-        ).fallbackToDestructiveMigration().openHelperFactory(factory).build()
+        ).fallbackToDestructiveMigration().build()
     }
-
+//    openHelperFactory(factory)
     @Provides
     fun provideDao(database: NewsDatabase): NewsDao = database.newsDao()
 }
