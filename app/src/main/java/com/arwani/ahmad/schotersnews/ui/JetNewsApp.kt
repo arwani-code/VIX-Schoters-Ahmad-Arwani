@@ -1,29 +1,47 @@
 package com.arwani.ahmad.schotersnews.ui
 
-import android.util.Log
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.arwani.ahmad.schotersnews.data.Result
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.arwani.ahmad.schotersnews.navigation.Screen
+import com.arwani.ahmad.schotersnews.ui.component.BottomBar
+import com.arwani.ahmad.schotersnews.ui.favorite.FavoriteScreen
+import com.arwani.ahmad.schotersnews.ui.home.HomeScreen
+import com.arwani.ahmad.schotersnews.ui.profile.ProfileScreen
 
 @Composable
 fun JetNewsApp(
     modifier: Modifier = Modifier,
-    viewModel: NewsViewModel = hiltViewModel()
+    viewModel: NewsViewModel = hiltViewModel(),
+    navController: NavHostController = rememberNavController(),
 ){
-    val news = viewModel.getNewsData.observeAsState().value
-    Text(text = "$news")
-    if(news != null){
-        when(news){
-            is Result.Loading -> {
-                Log.i("news_data", "JetNewsApp: loaading") }
-            is Result.Success -> {
-                Log.i("news_data", "JetNewsApp: ${news.data}")
+    Scaffold(
+        bottomBar = {
+            BottomBar(navController = navController)
+        },
+        modifier = modifier,
+        backgroundColor = MaterialTheme.colors.primary
+    ) { paddingValues ->
+        NavHost(
+            navController = navController,
+            startDestination = Screen.Home.route,
+            modifier = modifier.padding(paddingValues)
+        ) {
+            composable(Screen.Home.route) {
+                HomeScreen()
             }
-            is Result.Error -> {
-                Log.i("news_data", "JetNewsApp: ${news.error}")
+            composable(Screen.Favorite.route) {
+                FavoriteScreen()
+            }
+            composable(Screen.Profile.route) {
+                ProfileScreen()
             }
         }
     }
