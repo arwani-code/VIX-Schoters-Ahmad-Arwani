@@ -13,8 +13,6 @@ class NewsViewModel @Inject constructor(private val newsRepository: NewsReposito
 
     fun getNews(category: String) = newsRepository.getNewsData(category)
 
-    fun getBookmarkedNews() = newsRepository.getBookmarkedNews()
-
     fun saveNews(news: NewsEntity) {
         viewModelScope.launch {
             newsRepository.setNewsBookmark(news, true)

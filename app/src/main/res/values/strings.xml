@@ -9,10 +9,9 @@
     <string name="title_activity_detail_news">DetailNewsActivity</string>
     <string name="no_articles">No articles have been saved.</string>
 
-    <!--    <string name="sport_category">Sports</string>-->
-    <!--    <string name="business_category">Business</string>-->
-    <!--    <string name="health_category">Health</string>-->
-    <!--    <string name="entertainment_category">Entertainment</string>-->
-    <!--    <string name="technology_category">Technology</string>-->
-    <!--    <string name="music_category">Music</string>-->
+    <string name="name_profile">🧑‍🚀 Name</string>
+    <string name="username_profile">🌐 Github Username</string>
+    <string name="name_user">Ahmad Arwani</string>
+    <string name="username_user">arwani-code</string>
+    <string name="placeholder_search">Search articles</string>
 </resources>

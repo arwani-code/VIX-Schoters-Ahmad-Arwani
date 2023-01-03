@@ -1,6 +1,7 @@
 package com.arwani.ahmad.schotersnews.ui.category
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -26,8 +27,9 @@ class CategoryActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
         val category = intent.getStringExtra(NEWS_CATEGORY)
-        supportActionBar?.title = "Schoters $category"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val newsCategory = category?.lowercase()
+        supportActionBar?.title = "Schoters $category"
 
         val newsAdapter = NewsAdapter { news ->
             if (news.isBookmarked) {
@@ -37,8 +39,8 @@ class CategoryActivity : AppCompatActivity() {
             }
         }
 
-        if (category != null) {
-            viewModel.getNews(category.lowercase()).observe(this) { news ->
+        if (newsCategory != null) {
+            viewModel.getNews(newsCategory).observe(this) { news ->
                 if (news != null) {
                     when (news) {
                         is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
@@ -51,7 +53,7 @@ class CategoryActivity : AppCompatActivity() {
                             binding.progressBar.visibility = View.GONE
                             Toast.makeText(
                                 this,
-                                "Terjadi kesalahan ${news.error}",
+                                "Connect to the internet and try again",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

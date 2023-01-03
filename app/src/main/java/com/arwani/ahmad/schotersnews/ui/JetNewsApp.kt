@@ -14,6 +14,7 @@ import com.arwani.ahmad.schotersnews.navigation.Screen
 import com.arwani.ahmad.schotersnews.ui.component.BottomBar
 import com.arwani.ahmad.schotersnews.ui.home.HomeScreen
 import com.arwani.ahmad.schotersnews.ui.profile.ProfileScreen
+import com.arwani.ahmad.schotersnews.ui.search.SearchScreen
 
 @Composable
 fun JetNewsApp(
@@ -36,10 +37,11 @@ fun JetNewsApp(
             composable(Screen.Home.route) {
                 HomeScreen()
             }
-            composable(Screen.Favorite.route) {
+            composable(Screen.Search.route) {
+                SearchScreen()
             }
             composable(Screen.Profile.route) {
-                ProfileScreen()
+                ProfileScreen(navController = navController)
             }
         }
     }

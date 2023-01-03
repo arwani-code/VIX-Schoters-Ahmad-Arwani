@@ -19,8 +19,8 @@ interface NewsDao {
     @Update
     suspend fun updateNews(news: NewsEntity)
 
-    @Query("DELETE FROM ${DatabaseConstant.news} WHERE ${DatabaseConstant.bookmarked} = 0 AND ${DatabaseConstant.category} = :category")
-    suspend fun deleteAll(category: String)
+    @Query("DELETE FROM ${DatabaseConstant.news} WHERE ${DatabaseConstant.bookmarked} = 0 AND ${DatabaseConstant.category} = :name")
+    suspend fun deleteAll(name: String)
 
     @Query("SELECT EXISTS(SELECT * FROM ${DatabaseConstant.news} WHERE ${DatabaseConstant.title} = :title AND ${DatabaseConstant.bookmarked} = 1)")
     suspend fun isNewsBookmarked(title: String): Boolean

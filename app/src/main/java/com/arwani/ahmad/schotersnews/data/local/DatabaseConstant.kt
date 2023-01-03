@@ -7,5 +7,6 @@ object DatabaseConstant {
     const val url_to_image = "urlToImage"
     const val url = "url"
     const val bookmarked = "bookmarked"
-    const val category = "category"
+    const val category = "name"
+    const val id = "id"
 }

@@ -1,17 +1,23 @@
 package com.arwani.ahmad.schotersnews.data.local.entity
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.arwani.ahmad.schotersnews.data.local.DatabaseConstant
 import kotlinx.parcelize.Parcelize
+import org.jetbrains.annotations.NotNull
 
 @Parcelize
 @Entity(tableName = DatabaseConstant.news)
 class NewsEntity(
+
+    @field:PrimaryKey(autoGenerate = true)
+    @field:ColumnInfo(name = DatabaseConstant.id)
+    val id: Int = 0,
+
     @field:ColumnInfo(name = DatabaseConstant.title)
-    @field:PrimaryKey
     val title: String,
 
     @field:ColumnInfo(name = DatabaseConstant.category)
