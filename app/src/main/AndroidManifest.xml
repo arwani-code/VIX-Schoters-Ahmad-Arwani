@@ -16,9 +16,16 @@
         android:theme="@style/Theme.SchotersNews"
         tools:targetApi="31">
         <activity
-            android:name=".ui.detail.NewsDetailActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:name=".ui.favorite.FavoriteActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.detail.NewsDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

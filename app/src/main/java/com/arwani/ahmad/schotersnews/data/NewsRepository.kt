@@ -3,6 +3,7 @@ package com.arwani.ahmad.schotersnews.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
+import com.arwani.ahmad.schotersnews.BuildConfig
 import com.arwani.ahmad.schotersnews.data.local.entity.NewsEntity
 import com.arwani.ahmad.schotersnews.data.local.room.NewsDao
 import com.arwani.ahmad.schotersnews.data.network.NetworkConstant
@@ -19,24 +20,25 @@ class NewsRepository @Inject constructor(
             val articles = apiService.getNews(
                 category = category,
                 country = NetworkConstant.id,
-                apiKey = "504310ba299b47c2a161c19eda24b77a"
+                apiKey = BuildConfig.API_KEY
             ).articles
             val newsList = articles.map { article ->
                 val isBookmarked = newsDao.isNewsBookmarked(article.title)
                 NewsEntity(
                     article.title,
+                    category,
                     article.publishedAt,
                     article.urlToImage,
                     article.url,
                     isBookmarked
                 )
             }
-            newsDao.deleteAll()
+            newsDao.deleteAll(category)
             newsDao.insertNews(newsList)
         } catch (e: Exception) {
             emit(Result.Error(e.message.toString()))
         }
-        val localData: LiveData<Result<List<NewsEntity>>> = newsDao.getNews().map { Result.Success(it) }
+        val localData: LiveData<Result<List<NewsEntity>>> = newsDao.getNews(category = category).map { Result.Success(it) }
         emitSource(localData)
     }
 

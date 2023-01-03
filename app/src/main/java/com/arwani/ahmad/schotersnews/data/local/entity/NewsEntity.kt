@@ -14,6 +14,9 @@ class NewsEntity(
     @field:PrimaryKey
     val title: String,
 
+    @field:ColumnInfo(name = DatabaseConstant.category)
+    val category: String,
+
     @field:ColumnInfo(name = DatabaseConstant.published_at)
     val publishedAt: String,
 

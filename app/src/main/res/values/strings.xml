@@ -7,6 +7,7 @@
     <string name="published_date">Published Date</string>
     <string name="save_bookmark">Save Bookmark?</string>
     <string name="title_activity_detail_news">DetailNewsActivity</string>
+    <string name="no_articles">No articles have been saved.</string>
 
     <!--    <string name="sport_category">Sports</string>-->
     <!--    <string name="business_category">Business</string>-->

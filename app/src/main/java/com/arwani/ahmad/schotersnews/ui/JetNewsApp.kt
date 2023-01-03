@@ -12,7 +12,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.arwani.ahmad.schotersnews.navigation.Screen
 import com.arwani.ahmad.schotersnews.ui.component.BottomBar
-import com.arwani.ahmad.schotersnews.ui.favorite.FavoriteScreen
 import com.arwani.ahmad.schotersnews.ui.home.HomeScreen
 import com.arwani.ahmad.schotersnews.ui.profile.ProfileScreen
 
@@ -38,7 +37,6 @@ fun JetNewsApp(
                 HomeScreen()
             }
             composable(Screen.Favorite.route) {
-                FavoriteScreen()
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()
