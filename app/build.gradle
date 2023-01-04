@@ -21,7 +21,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        buildConfigField("String", "API_KEY", '"f3358c5985684895907c6f0c1b3b3337"')
+        buildConfigField("String", "API_KEY", '"fdbb7aafc4894d44ae817efeb4a1a143"')
     }
 
     buildTypes {
@@ -67,6 +67,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     //room
     implementation "androidx.room:room-runtime:2.5.0-rc01"
