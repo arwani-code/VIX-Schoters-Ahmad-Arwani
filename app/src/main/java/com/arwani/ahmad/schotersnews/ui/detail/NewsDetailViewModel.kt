@@ -1,4 +1,4 @@
-package com.arwani.ahmad.schotersnews.ui.favorite
+package com.arwani.ahmad.schotersnews.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,8 +9,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteViewModel @Inject constructor(private val newsRepository: NewsRepository): ViewModel() {
-    val newsFavorite = newsRepository.getBookmarkedNews()
+class NewsDetailViewModel @Inject constructor(private val newsRepository: NewsRepository): ViewModel() {
 
     fun saveNews(news: NewsEntity) {
         viewModelScope.launch {

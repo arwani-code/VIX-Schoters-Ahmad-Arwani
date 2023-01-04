@@ -21,14 +21,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.viewinterop.AndroidView
 import com.arwani.ahmad.schotersnews.R
 import com.arwani.ahmad.schotersnews.data.local.entity.NewsEntity
-import com.arwani.ahmad.schotersnews.ui.NewsViewModel
 import com.arwani.ahmad.schotersnews.ui.theme.Blue50
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewsDetailActivity : AppCompatActivity() {
 
-    private val viewModel: NewsViewModel by viewModels()
+    private val viewModel: NewsDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +64,7 @@ class NewsDetailActivity : AppCompatActivity() {
 @Composable
 fun NewsDetailScreen(
     newsDetail: NewsEntity,
-    viewModel: NewsViewModel,
+    viewModel: NewsDetailViewModel,
 ) {
     var newsState by remember {
         mutableStateOf(newsDetail.isBookmarked)

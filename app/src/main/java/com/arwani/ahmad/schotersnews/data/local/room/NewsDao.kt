@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.arwani.ahmad.schotersnews.data.local.DatabaseConstant
 import com.arwani.ahmad.schotersnews.data.local.entity.NewsEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NewsDao {
@@ -25,7 +24,4 @@ interface NewsDao {
 
     @Query("SELECT EXISTS(SELECT * FROM ${DatabaseConstant.news} WHERE ${DatabaseConstant.title} = :title AND ${DatabaseConstant.bookmarked} = 1)")
     suspend fun isNewsBookmarked(title: String): Boolean
-
-    @Query("SELECT * FROM ${DatabaseConstant.news} WHERE ${DatabaseConstant.title} LIKE '%' || :title || '%'")
-    fun searchNews(title: String): LiveData<List<NewsEntity>>
 }

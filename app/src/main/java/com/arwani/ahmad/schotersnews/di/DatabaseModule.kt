@@ -2,6 +2,7 @@ package com.arwani.ahmad.schotersnews.di
 
 import android.content.Context
 import androidx.room.Room
+import com.arwani.ahmad.schotersnews.data.local.DatabaseConstant
 import com.arwani.ahmad.schotersnews.data.local.room.NewsDao
 import com.arwani.ahmad.schotersnews.data.local.room.NewsDatabase
 import dagger.Module
@@ -20,16 +21,16 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context): NewsDatabase {
-        val passphrase: ByteArray = SQLiteDatabase.getBytes("Schotersnews".toCharArray())
+        val passphrase: ByteArray = SQLiteDatabase.getBytes(DatabaseConstant.charDb.toCharArray())
         val factory = SupportFactory(passphrase)
 
         return Room.databaseBuilder(
             context,
             NewsDatabase::class.java,
-            "News.db"
-        ).fallbackToDestructiveMigration().build()
+            DatabaseConstant.newsDb
+        ).fallbackToDestructiveMigration().openHelperFactory(factory).build()
     }
-//    openHelperFactory(factory)
+
     @Provides
     fun provideDao(database: NewsDatabase): NewsDao = database.newsDao()
 }

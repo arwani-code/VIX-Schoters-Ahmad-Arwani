@@ -5,14 +5,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.arwani.ahmad.schotersnews.navigation.Screen
 import com.arwani.ahmad.schotersnews.ui.component.BottomBar
-import com.arwani.ahmad.schotersnews.ui.favorite.FavoriteViewModel
 import com.arwani.ahmad.schotersnews.ui.home.HomeScreen
 import com.arwani.ahmad.schotersnews.ui.profile.ProfileScreen
 
@@ -37,7 +35,7 @@ fun JetNewsApp(
                 HomeScreen()
             }
             composable(Screen.Profile.route) {
-                ProfileScreen(navController = navController)
+                ProfileScreen()
             }
         }
     }

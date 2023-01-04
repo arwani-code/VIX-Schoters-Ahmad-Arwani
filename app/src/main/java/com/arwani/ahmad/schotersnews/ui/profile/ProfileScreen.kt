@@ -15,12 +15,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import com.arwani.ahmad.schotersnews.R
 import com.arwani.ahmad.schotersnews.ui.theme.Blue50
 
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier, navController: NavHostController) {
+fun ProfileScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -31,7 +30,7 @@ fun ProfileScreen(modifier: Modifier = Modifier, navController: NavHostControlle
                 .clip(CircleShape)
                 .size(200.dp),
             painter = painterResource(id = R.drawable.photo_profile),
-            contentDescription = "foto profile",
+            contentDescription = stringResource(R.string.foto_profile),
             contentScale = ContentScale.Crop
         )
         Divider(

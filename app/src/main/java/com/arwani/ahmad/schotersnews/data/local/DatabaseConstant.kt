@@ -9,4 +9,7 @@ object DatabaseConstant {
     const val bookmarked = "bookmarked"
     const val category = "name"
     const val id = "id"
+
+    const val newsDb = "News.Db"
+    const val charDb = "Schotersnews"
 }

@@ -11,8 +11,6 @@ import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.arwani.ahmad.schotersnews.R
-import com.arwani.ahmad.schotersnews.notification.NotificationConstant.NEWS_BOOKMARKED
-import com.arwani.ahmad.schotersnews.notification.NotificationConstant.NEWS_ID
 import com.arwani.ahmad.schotersnews.notification.NotificationConstant.NOTIFICATION_CHANNEL_ID
 import com.arwani.ahmad.schotersnews.notification.NotificationConstant.NOTIF_UNIQUE_WORK
 import com.arwani.ahmad.schotersnews.ui.favorite.FavoriteActivity

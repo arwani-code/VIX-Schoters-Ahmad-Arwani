@@ -7,9 +7,4 @@ object NetworkConstant {
     const val category = "category"
     const val api_key = "apiKey"
     const val id = "id"
-    const val everything = "everything"
-    const val query = "q"
-    const val from = "from"
-    const val sortBy = "sortBy"
-    const val publishedAt = "publishedAt"
 }

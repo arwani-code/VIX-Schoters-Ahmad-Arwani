@@ -17,4 +17,7 @@
 
     <string name="notify_content">Please add the article to your favorites ✨🎌🙃</string>
     <string name="notify_title">No Articles Saved 👀</string>
+    <string name="fail_connect_internet">Connect to the internet and try again</string>
+    <string name="favorite_articles">Favourite Articles</string>
+    <string name="foto_profile">foto profile</string>
 </resources>

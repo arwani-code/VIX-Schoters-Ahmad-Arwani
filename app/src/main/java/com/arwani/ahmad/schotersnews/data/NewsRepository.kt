@@ -1,6 +1,5 @@
 package com.arwani.ahmad.schotersnews.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
@@ -9,9 +8,6 @@ import com.arwani.ahmad.schotersnews.data.local.entity.NewsEntity
 import com.arwani.ahmad.schotersnews.data.local.room.NewsDao
 import com.arwani.ahmad.schotersnews.data.network.NetworkConstant
 import com.arwani.ahmad.schotersnews.data.network.retrofit.ApiService
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class NewsRepository @Inject constructor(
@@ -50,12 +46,6 @@ class NewsRepository @Inject constructor(
 
     fun getBookmarkedNews(): LiveData<List<NewsEntity>> {
         return newsDao.getBookmarkedNews()
-    }
-
-    fun getNewsQuery(title: String): LiveData<Result<List<NewsEntity>>> = liveData {
-        emit(Result.Loading)
-        val articles: LiveData<Result<List<NewsEntity>>> = newsDao.searchNews(title).map { Result.Success(it) }
-        emitSource(articles)
     }
 
     suspend fun setNewsBookmark(news: NewsEntity, bookmarkState: Boolean) {

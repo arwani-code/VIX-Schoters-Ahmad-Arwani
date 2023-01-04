@@ -2,22 +2,21 @@ package com.arwani.ahmad.schotersnews.ui.favorite
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.Constraints
-import androidx.work.WorkManager
-import com.arwani.ahmad.schotersnews.databinding.ActivityFavoriteBinding
-import com.arwani.ahmad.schotersnews.ui.adapter.NewsAdapter
-import dagger.hilt.android.AndroidEntryPoint
 import androidx.work.Data.Builder
 import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import com.arwani.ahmad.schotersnews.R
+import com.arwani.ahmad.schotersnews.databinding.ActivityFavoriteBinding
 import com.arwani.ahmad.schotersnews.notification.NotificationConstant
 import com.arwani.ahmad.schotersnews.notification.NotificationWorker
+import com.arwani.ahmad.schotersnews.ui.adapter.NewsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
@@ -32,7 +31,7 @@ class FavoriteActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
-        supportActionBar?.title = "Favourite Articles"
+        supportActionBar?.title = getString(R.string.favorite_articles)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         workManager = WorkManager.getInstance(this)
 
@@ -59,15 +58,9 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
-    }
-
-    override fun onPause() {
-        workManager.cancelAllWorkByTag(NotificationConstant.NOTIFICATION_CHANNEL_ID)
-        super.onPause()
     }
 
     private fun requestWorkManager() {
