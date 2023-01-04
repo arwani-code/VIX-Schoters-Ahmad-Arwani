@@ -27,5 +27,5 @@ interface NewsDao {
     suspend fun isNewsBookmarked(title: String): Boolean
 
     @Query("SELECT * FROM ${DatabaseConstant.news} WHERE ${DatabaseConstant.title} LIKE '%' || :title || '%'")
-    fun searchNews(title: String): Flow<List<NewsEntity>>
+    fun searchNews(title: String): LiveData<List<NewsEntity>>
 }

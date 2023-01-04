@@ -1,19 +1,29 @@
 package com.arwani.ahmad.schotersnews.ui.favorite
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.Constraints
+import androidx.work.WorkManager
 import com.arwani.ahmad.schotersnews.databinding.ActivityFavoriteBinding
 import com.arwani.ahmad.schotersnews.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.work.Data.Builder
+import androidx.work.OneTimeWorkRequest
+import com.arwani.ahmad.schotersnews.notification.NotificationConstant
+import com.arwani.ahmad.schotersnews.notification.NotificationWorker
 
 @AndroidEntryPoint
 class FavoriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFavoriteBinding
+    private lateinit var workManager: WorkManager
     private val viewModel: FavoriteViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +34,7 @@ class FavoriteActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Favourite Articles"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        workManager = WorkManager.getInstance(this)
 
         val newsAdapter = NewsAdapter { news ->
             if (news.isBookmarked) {
@@ -35,8 +46,10 @@ class FavoriteActivity : AppCompatActivity() {
 
         viewModel.newsFavorite.observe(this) { news ->
             newsAdapter.submitList(news)
-            if (news.isEmpty())
+            if (news.isEmpty()){
                 binding.textView.visibility = View.VISIBLE
+                requestWorkManager()
+            }
         }
 
         binding.rvNews.apply {
@@ -51,4 +64,28 @@ class FavoriteActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
         return true
     }
+
+    override fun onPause() {
+        workManager.cancelAllWorkByTag(NotificationConstant.NOTIFICATION_CHANNEL_ID)
+        super.onPause()
+    }
+
+    private fun requestWorkManager() {
+        val data = Builder()
+            .build()
+        val constraints = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Constraints.Builder()
+                .setRequiresDeviceIdle(false)
+                .build()
+        } else {
+            Constraints.Builder().build()
+        }
+        val oneWorkRequest = OneTimeWorkRequest.Builder(NotificationWorker::class.java)
+            .setInputData(data)
+            .setConstraints(constraints)
+            .addTag(NotificationConstant.NOTIFICATION_CHANNEL_ID)
+            .build()
+        workManager.enqueue(oneWorkRequest)
+    }
+
 }

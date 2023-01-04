@@ -14,4 +14,7 @@
     <string name="name_user">Ahmad Arwani</string>
     <string name="username_user">arwani-code</string>
     <string name="placeholder_search">Search articles</string>
+
+    <string name="notify_content">Please add the article to your favorites ✨🎌🙃</string>
+    <string name="notify_title">No Articles Saved 👀</string>
 </resources>

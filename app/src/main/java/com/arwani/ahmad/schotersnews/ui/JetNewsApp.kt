@@ -12,14 +12,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.arwani.ahmad.schotersnews.navigation.Screen
 import com.arwani.ahmad.schotersnews.ui.component.BottomBar
+import com.arwani.ahmad.schotersnews.ui.favorite.FavoriteViewModel
 import com.arwani.ahmad.schotersnews.ui.home.HomeScreen
 import com.arwani.ahmad.schotersnews.ui.profile.ProfileScreen
-import com.arwani.ahmad.schotersnews.ui.search.SearchScreen
 
 @Composable
 fun JetNewsApp(
     modifier: Modifier = Modifier,
-    viewModel: NewsViewModel = hiltViewModel(),
     navController: NavHostController = rememberNavController(),
 ) {
     Scaffold(
@@ -36,9 +35,6 @@ fun JetNewsApp(
         ) {
             composable(Screen.Home.route) {
                 HomeScreen()
-            }
-            composable(Screen.Search.route) {
-                SearchScreen()
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(navController = navController)

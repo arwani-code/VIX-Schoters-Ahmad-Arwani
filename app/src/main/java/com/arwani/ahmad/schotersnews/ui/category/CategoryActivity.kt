@@ -1,5 +1,6 @@
 package com.arwani.ahmad.schotersnews.ui.category
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -7,11 +8,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.Constraints
 import com.arwani.ahmad.schotersnews.data.Result
+import com.arwani.ahmad.schotersnews.data.local.entity.NewsEntity
 import com.arwani.ahmad.schotersnews.databinding.CategoryMainBinding
 import com.arwani.ahmad.schotersnews.ui.NewsViewModel
 import com.arwani.ahmad.schotersnews.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import com.arwani.ahmad.schotersnews.notification.NotificationConstant
+import com.arwani.ahmad.schotersnews.notification.NotificationConstant.NEWS_ID
+import com.arwani.ahmad.schotersnews.notification.NotificationConstant.NOTIFICATION_CHANNEL_ID
+import com.arwani.ahmad.schotersnews.notification.NotificationWorker
 
 @AndroidEntryPoint
 class CategoryActivity : AppCompatActivity() {

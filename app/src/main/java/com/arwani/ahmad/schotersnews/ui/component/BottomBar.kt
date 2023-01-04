@@ -36,9 +36,6 @@ fun BottomBar(
         val navigationItems = listOf(
             NavigationItem(title = "Home", icon = Icons.Default.Home, screen = Screen.Home),
             NavigationItem(
-                title = "Search", icon = Icons.Default.Search, screen = Screen.Search
-            ),
-            NavigationItem(
                 title = "Profile", icon = Icons.Default.AccountCircle, screen = Screen.Profile
             )
         )
