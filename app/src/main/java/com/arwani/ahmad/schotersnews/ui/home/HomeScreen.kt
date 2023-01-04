@@ -12,6 +12,8 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,12 +22,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.arwani.ahmad.schotersnews.R
 import com.arwani.ahmad.schotersnews.ui.category.CategoryActivity
 import com.arwani.ahmad.schotersnews.ui.favorite.FavoriteActivity
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, viewModel: HomeViewModel = hiltViewModel()) {
+    val newsInit by viewModel.newsInit.observeAsState()
     val mContext = LocalContext.current
 
     Column(
@@ -42,14 +46,19 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "logo",
-                modifier = modifier.size(180.dp).padding(start = 8.dp)
+                modifier = modifier
+                    .size(180.dp)
+                    .padding(start = 8.dp)
             )
             Image(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_bookmarked_white),
                 contentDescription = "Favorite",
-                modifier = modifier.padding(16.dp).size(27.dp).clickable {
-                    mContext.startActivity(Intent(mContext, FavoriteActivity::class.java))
-                }
+                modifier = modifier
+                    .padding(16.dp)
+                    .size(27.dp)
+                    .clickable {
+                        mContext.startActivity(Intent(mContext, FavoriteActivity::class.java))
+                    }
             )
         }
         LazyVerticalGrid(

@@ -1,6 +1,5 @@
 package com.arwani.ahmad.schotersnews.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.map
@@ -8,21 +7,16 @@ import com.arwani.ahmad.schotersnews.BuildConfig
 import com.arwani.ahmad.schotersnews.data.local.entity.NewsEntity
 import com.arwani.ahmad.schotersnews.data.local.room.NewsDao
 import com.arwani.ahmad.schotersnews.data.network.NetworkConstant
-import com.arwani.ahmad.schotersnews.data.network.response.Article
 import com.arwani.ahmad.schotersnews.data.network.retrofit.ApiService
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 class NewsRepository @Inject constructor(
     private val apiService: ApiService,
     private val newsDao: NewsDao
 ) {
+    fun getNewsQuery(title: String): Flow<List<NewsEntity>> = newsDao.searchNews(title)
+
     fun getNewsData(category: String): LiveData<Result<List<NewsEntity>>> = liveData {
         emit(Result.Loading)
         try {
@@ -52,19 +46,6 @@ class NewsRepository @Inject constructor(
             newsDao.getNews(category = category).map { Result.Success(it) }
         emitSource(localData)
     }
-
-    fun getNewsQuery(query: String): Flow<Result<List<Article>>> = flow {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val current = LocalDateTime.now().format(formatter)
-        val response = apiService.getNewsQuery(
-            q = query,
-            from = current,
-            sortBy = NetworkConstant.publishedAt,
-            apiKey = BuildConfig.API_KEY
-        )
-        val articles = response.articles
-        emit(Result.Success(articles))
-    }.flowOn(Dispatchers.IO)
 
     fun getBookmarkedNews(): LiveData<List<NewsEntity>> {
         return newsDao.getBookmarkedNews()
