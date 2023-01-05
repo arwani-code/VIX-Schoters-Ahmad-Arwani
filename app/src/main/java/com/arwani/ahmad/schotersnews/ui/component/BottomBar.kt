@@ -28,18 +28,18 @@ fun BottomBar(
     modifier: Modifier = Modifier,
     navController: NavHostController,
 ) {
-    BottomNavigation(
-        modifier = modifier.padding(top = 8.dp),
-    ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        val navigationItems = listOf(
-            NavigationItem(title = "Home", icon = Icons.Default.Home, screen = Screen.Home),
-            NavigationItem(
-                title = "Profile", icon = Icons.Default.AccountCircle, screen = Screen.Profile
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+    if (currentRoute != Screen.splash.route) {
+        BottomNavigation(
+            modifier = modifier.padding(top = 8.dp),
+        ) {
+            val navigationItems = listOf(
+                NavigationItem(title = "Home", icon = Icons.Default.Home, screen = Screen.Home),
+                NavigationItem(
+                    title = "Profile", icon = Icons.Default.AccountCircle, screen = Screen.Profile
+                )
             )
-        )
-        if (currentRoute != Screen.splash.route) {
             BottomNavigation(
                 backgroundColor = Black100,
                 contentColor = Blue50,
@@ -62,4 +62,5 @@ fun BottomBar(
             }
         }
     }
+
 }

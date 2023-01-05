@@ -17,30 +17,28 @@ class NewsRepository @Inject constructor(
 ) {
     fun getNewsData(category: String): LiveData<Result<List<NewsEntity>>> = liveData {
         emit(Result.Loading)
-        wrapEspressoIdlingResource {
-            try {
-                val response = apiService.getNews(
+        try {
+            val response = apiService.getNews(
+                category = category,
+                country = NetworkConstant.id,
+                apiKey = BuildConfig.API_KEY
+            )
+            val articles = response.articles
+            val newsList = articles.map { article ->
+                val isBookmarked = newsDao.isNewsBookmarked(article.title)
+                NewsEntity(
+                    title = article.title,
                     category = category,
-                    country = NetworkConstant.id,
-                    apiKey = BuildConfig.API_KEY
+                    publishedAt = article.publishedAt,
+                    urlToImage = article.urlToImage,
+                    url = article.url,
+                    isBookmarked = isBookmarked
                 )
-                val articles = response.articles
-                val newsList = articles.map { article ->
-                    val isBookmarked = newsDao.isNewsBookmarked(article.title)
-                    NewsEntity(
-                        title = article.title,
-                        category = category,
-                        publishedAt = article.publishedAt,
-                        urlToImage = article.urlToImage,
-                        url = article.url,
-                        isBookmarked = isBookmarked
-                    )
-                }
-                newsDao.deleteAll(name = category)
-                newsDao.insertNews(newsList)
-            } catch (e: Exception) {
-                emit(Result.Error(e.message.toString()))
             }
+            newsDao.deleteAll(name = category)
+            newsDao.insertNews(newsList)
+        } catch (e: Exception) {
+            emit(Result.Error(e.message.toString()))
         }
         val localData: LiveData<Result<List<NewsEntity>>> =
             newsDao.getNews(category = category).map { Result.Success(it) }
