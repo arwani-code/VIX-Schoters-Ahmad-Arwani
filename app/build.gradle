@@ -49,6 +49,10 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    testOptions {
+        animationsDisabled = true
+    }
+
 }
 
 dependencies {
@@ -63,8 +67,13 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     implementation 'androidx.test:core-ktx:1.5.0'
+    implementation 'androidx.test.espresso:espresso-contrib:3.5.0'
 
     //testing
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    androidTestImplementation "androidx.navigation:navigation-testing:2.5.3"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
@@ -74,6 +83,9 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:3.12.4'
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4"
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.0'
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.5.0'
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:3.0.2"
 
     //room
     implementation "androidx.room:room-runtime:2.5.0-rc01"

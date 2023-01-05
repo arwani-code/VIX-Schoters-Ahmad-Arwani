@@ -1,5 +1,6 @@
 package com.arwani.ahmad.schotersnews.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
@@ -8,11 +9,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.arwani.ahmad.schotersnews.navigation.Screen
 import com.arwani.ahmad.schotersnews.ui.component.BottomBar
 import com.arwani.ahmad.schotersnews.ui.home.HomeScreen
 import com.arwani.ahmad.schotersnews.ui.profile.ProfileScreen
+import com.arwani.ahmad.schotersnews.ui.splashscreen.SplashScreen
+import kotlinx.coroutines.delay
 
 @Composable
 fun JetNewsApp(
@@ -28,7 +32,7 @@ fun JetNewsApp(
     ) { paddingValues ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Home.route,
+            startDestination = Screen.splash.route,
             modifier = modifier.padding(paddingValues)
         ) {
             composable(Screen.Home.route) {
@@ -36,6 +40,9 @@ fun JetNewsApp(
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()
+            }
+            composable(Screen.splash.route) {
+                SplashScreen(navController = navController)
             }
         }
     }

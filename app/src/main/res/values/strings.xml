@@ -20,4 +20,7 @@
     <string name="fail_connect_internet">Connect to the internet and try again</string>
     <string name="favorite_articles">Favourite Articles</string>
     <string name="foto_profile">foto profile</string>
+    <string name="news_categories">News Categories</string>
+    <string name="favorite_description">Favorite</string>
+    <string name="logo_description">logo</string>
 </resources>

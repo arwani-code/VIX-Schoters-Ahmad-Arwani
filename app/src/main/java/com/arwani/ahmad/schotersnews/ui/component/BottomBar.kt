@@ -1,5 +1,6 @@
 package com.arwani.ahmad.schotersnews.ui.component
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -38,24 +39,26 @@ fun BottomBar(
                 title = "Profile", icon = Icons.Default.AccountCircle, screen = Screen.Profile
             )
         )
-        BottomNavigation(
-            backgroundColor = Black100,
-            contentColor = Blue50,
-        ) {
-            navigationItems.map { item ->
-                BottomNavigationItem(selected = currentRoute == item.screen.route, onClick = {
-                    navController.navigate(item.screen.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+        if (currentRoute != Screen.splash.route) {
+            BottomNavigation(
+                backgroundColor = Black100,
+                contentColor = Blue50,
+            ) {
+                navigationItems.map { item ->
+                    BottomNavigationItem(selected = currentRoute == item.screen.route, onClick = {
+                        navController.navigate(item.screen.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            restoreState = true
+                            launchSingleTop = true
                         }
-                        restoreState = true
-                        launchSingleTop = true
-                    }
-                }, label = { Text(item.title) },
-                    unselectedContentColor = Grey100,
-                    icon = {
-                        Icon(imageVector = item.icon, contentDescription = item.title)
-                    })
+                    }, label = { Text(item.title) },
+                        unselectedContentColor = Grey100,
+                        icon = {
+                            Icon(imageVector = item.icon, contentDescription = item.title)
+                        })
+                }
             }
         }
     }

@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,14 +42,14 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         ) {
             Image(
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "logo",
+                contentDescription = stringResource(R.string.logo_description),
                 modifier = modifier
                     .size(180.dp)
                     .padding(start = 8.dp)
             )
             Image(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_bookmarked_white),
-                contentDescription = "Favorite",
+                contentDescription = stringResource(R.string.favorite_description),
                 modifier = modifier
                     .padding(16.dp)
                     .size(27.dp)
@@ -65,7 +66,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         ) {
             item(span = { GridItemSpan(2) }) {
                 Text(
-                    text = "News Categories",
+                    text = stringResource(R.string.news_categories),
                     style = MaterialTheme.typography.h6,
                     color = Color.White,
                     modifier = modifier.padding(bottom = 8.dp)
