@@ -1,6 +1,7 @@
 package com.arwani.ahmad.schotersnews.ui.category
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -39,6 +40,7 @@ class CategoryActivity : AppCompatActivity() {
         }
 
         if (newsCategory != null) {
+            Log.i("KSMKMDKSMDKSDMKSD", "onCreate: $newsCategory")
             viewModel.getNews(newsCategory).observe(this) { news ->
                 if (news != null) {
                     when (news) {

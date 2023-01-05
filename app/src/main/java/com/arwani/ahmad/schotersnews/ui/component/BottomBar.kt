@@ -31,34 +31,30 @@ fun BottomBar(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     if (currentRoute != Screen.splash.route) {
-        BottomNavigation(
-            modifier = modifier.padding(top = 8.dp),
-        ) {
-            val navigationItems = listOf(
-                NavigationItem(title = "Home", icon = Icons.Default.Home, screen = Screen.Home),
-                NavigationItem(
-                    title = "Profile", icon = Icons.Default.AccountCircle, screen = Screen.Profile
-                )
+        val navigationItems = listOf(
+            NavigationItem(title = "Home", icon = Icons.Default.Home, screen = Screen.Home),
+            NavigationItem(
+                title = "Profile", icon = Icons.Default.AccountCircle, screen = Screen.Profile
             )
-            BottomNavigation(
-                backgroundColor = Black100,
-                contentColor = Blue50,
-            ) {
-                navigationItems.map { item ->
-                    BottomNavigationItem(selected = currentRoute == item.screen.route, onClick = {
-                        navController.navigate(item.screen.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            restoreState = true
-                            launchSingleTop = true
+        )
+        BottomNavigation(
+            backgroundColor = Black100,
+            contentColor = Blue50,
+        ) {
+            navigationItems.map { item ->
+                BottomNavigationItem(selected = currentRoute == item.screen.route, onClick = {
+                    navController.navigate(item.screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
                         }
-                    }, label = { Text(item.title) },
-                        unselectedContentColor = Grey100,
-                        icon = {
-                            Icon(imageVector = item.icon, contentDescription = item.title)
-                        })
-                }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
+                }, label = { Text(item.title) },
+                    unselectedContentColor = Grey100,
+                    icon = {
+                        Icon(imageVector = item.icon, contentDescription = item.title)
+                    })
             }
         }
     }

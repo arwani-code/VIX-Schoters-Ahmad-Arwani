@@ -35,11 +35,11 @@ val dummyCategory = listOf(
     Category(
         imageCategory = R.drawable.sports,
         textCategory = "Sports",
-        color = Blue50
+        color = Yellow50
     ),
     Category(
-        imageCategory = R.drawable.music,
-        textCategory = "Music",
+        imageCategory = R.drawable.science,
+        textCategory = "Science",
         color = Black100
     )
 )

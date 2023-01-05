@@ -40,7 +40,7 @@ class NotificationWorker(ctx: Context, params: WorkerParameters) :  Worker(ctx, 
         val notification: NotificationCompat.Builder =
             NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL_ID)
                 .setContentIntent(getPendingIntent())
-                .setSmallIcon(R.drawable.ic_notifications)
+                .setSmallIcon(R.drawable.schoters_logo)
                 .setContentTitle(applicationContext.getString(R.string.notify_title))
                 .setContentText(applicationContext.getString(R.string.notify_content))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
