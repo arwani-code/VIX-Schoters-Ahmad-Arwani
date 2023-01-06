@@ -8,7 +8,7 @@ import com.arwani.ahmad.schotersnews.data.local.entity.NewsEntity
 import com.arwani.ahmad.schotersnews.data.local.room.NewsDao
 import com.arwani.ahmad.schotersnews.data.network.NetworkConstant
 import com.arwani.ahmad.schotersnews.data.network.retrofit.ApiService
-import com.arwani.ahmad.schotersnews.util.wrapEspressoIdlingResource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NewsRepository @Inject constructor(
@@ -52,5 +52,9 @@ class NewsRepository @Inject constructor(
     suspend fun setNewsBookmark(news: NewsEntity, bookmarkState: Boolean) {
         news.isBookmarked = bookmarkState
         newsDao.updateNews(news)
+    }
+
+    fun searchDatabase(searchQuery: String, category: String): Flow<List<NewsEntity>> {
+        return newsDao.searchDatabase(searchQuery, category = category)
     }
 }

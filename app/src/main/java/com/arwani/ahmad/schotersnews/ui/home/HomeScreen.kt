@@ -28,6 +28,7 @@ import com.arwani.ahmad.schotersnews.ui.favorite.FavoriteActivity
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+
     val mContext = LocalContext.current
     Column(
         modifier = modifier.fillMaxSize(),

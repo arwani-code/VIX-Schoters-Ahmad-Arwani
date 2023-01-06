@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.arwani.ahmad.schotersnews.data.local.entity.NewsEntity
 import com.arwani.ahmad.schotersnews.data.local.room.NewsDao
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class FakeNewsDao : NewsDao {
 
@@ -35,5 +37,9 @@ class FakeNewsDao : NewsDao {
 
     override suspend fun isNewsBookmarked(title: String): Boolean {
         return newsData.isNotEmpty()
+    }
+
+    override fun searchDatabase(searchQuery: String, category: String): Flow<List<NewsEntity>> {
+        return flow { newsData.last { it.isBookmarked } }
     }
 }

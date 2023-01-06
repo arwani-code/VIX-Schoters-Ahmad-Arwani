@@ -21,7 +21,7 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        buildConfigField("String", "API_KEY", '"fdbb7aafc4894d44ae817efeb4a1a143"')
+        buildConfigField("String", "API_KEY", '"504310ba299b47c2a161c19eda24b77a"')
     }
 
     buildTypes {

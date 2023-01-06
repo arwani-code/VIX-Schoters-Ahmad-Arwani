@@ -1,12 +1,13 @@
 package com.arwani.ahmad.schotersnews.ui.category
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arwani.ahmad.schotersnews.R
 import com.arwani.ahmad.schotersnews.data.Result
@@ -15,10 +16,12 @@ import com.arwani.ahmad.schotersnews.ui.adapter.NewsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoryActivity : AppCompatActivity() {
+class CategoryActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: CategoryMainBinding
     private val viewModel: CategoryViewModel by viewModels()
+    private lateinit var newsAdapter: NewsAdapter
+    private var newsCategory: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +31,10 @@ class CategoryActivity : AppCompatActivity() {
 
         val category = intent.getStringExtra(NEWS_CATEGORY)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val newsCategory = category?.lowercase()
+        newsCategory = category?.lowercase()
         supportActionBar?.title = "Schoters $category"
 
-        val newsAdapter = NewsAdapter { news ->
+        newsAdapter = NewsAdapter { news ->
             if (news.isBookmarked) {
                 viewModel.deleteNews(news)
             } else {
@@ -39,9 +42,8 @@ class CategoryActivity : AppCompatActivity() {
             }
         }
 
-        if (newsCategory != null) {
-            Log.i("KSMKMDKSMDKSDMKSD", "onCreate: $newsCategory")
-            viewModel.getNews(newsCategory).observe(this) { news ->
+        newsCategory?.let {
+            viewModel.getNews(it).observe(this) { news ->
                 if (news != null) {
                     when (news) {
                         is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
@@ -63,6 +65,10 @@ class CategoryActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.isLoading.observe(this) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
         binding.rvNews.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
@@ -70,12 +76,42 @@ class CategoryActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.category_menu, menu)
+
+        val search = menu?.findItem(R.id.menu_search)
+        val searchView = search?.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true
+        searchView?.setOnQueryTextListener(this)
+
+        return true
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
     }
 
+    override fun onQueryTextSubmit(query: String?): Boolean = true
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (newText != null) {
+            searchDatabase(newText)
+        }
+        return true
+    }
+
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+        newsCategory?.let { news ->
+            viewModel.searchDatabase(searchQuery, category = news).observe(this) {
+                newsAdapter.submitList(it)
+            }
+        }
+    }
+
     companion object {
         const val NEWS_CATEGORY = "news"
     }
+
 }
